@@ -253,7 +253,7 @@ a:active {
   margin-left: auto;
 }
 
-section {
+.section {
   padding: var(--section-padding);
 }
 
