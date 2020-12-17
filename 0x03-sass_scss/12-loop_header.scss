@@ -1,5 +1,5 @@
 /* For loop example */
-@for $i from 1 through 3 {
+@for $i from 1 through 5 {
   h#{$i} {
     font-size: #{$i}px;
   }
