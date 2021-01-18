@@ -809,9 +809,6 @@ ul.row {
   transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
-.card-work:hover .card-inner {
-  background-color: rgba(0, 0, 0, 0.7);
-}
 
 .card-work .card-title {
   text-align: center;
@@ -833,10 +830,6 @@ ul.row {
   right: 0;
   bottom: 0;
   content: "";
-}
-
-.card-work:hover .card-title {
-  opacity: 1;
 }
 
 @media only screen and (max-width: 767px) {
