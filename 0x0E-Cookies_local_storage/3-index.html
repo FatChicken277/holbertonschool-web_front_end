@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task 3</title>
+  </head>
+
+  <body>
+    <div id="form">
+      <h2>Login to the website</h2>
+      <input type="text" id="firstname" placeholder="First Name" />
+      <input type="text" id="email" placeholder="Email" />
+      <button onclick="setCookies()">Log me in</button>
+    </div>
+
+    <script language="JavaScript">
+      function setCookies() {
+        let firstname = document.getElementById("firstname").value;
+        let email = document.getElementById("email").value;
+
+        let expireDate = new Date();
+        expireDate.setTime(expireDate.getTime() + 10 * 24 * 60 * 60 * 1000);
+        expireDate = expireDate.toUTCString();
+
+        document.cookie = `firstname=${firstname}; expires=${expireDate}`;
+        document.cookie = `email=${email}; expires=${expireDate}`;
+
+        showWelcomeMessageOrForm();
+      }
+
+      function showCookies() {
+        let p = document.createElement("P");
+        p.innerHTML = `Email: ${getCookie("email")} - Firstname: ${getCookie("firstname")}`;
+
+        document.body.appendChild(p);
+      }
+
+      function getCookie(name) {
+        let match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+
+        if (match) return match[2];
+
+        return "";
+      }
+
+      function showForm() {
+        let welcome = document.getElementById("welcome");
+        if (welcome.style.display != "none")
+        welcome.remove();
+
+        let form = document.getElementById("form");
+        form.style.display = "block";
+      }
+
+      function hideForm() {
+        let form = document.getElementById("form");
+        form.style.display = "none";
+      }
+
+      function deleteCookiesAndShowForm() {
+        document.cookie = "";
+        showForm();
+      }
+
+      function showWelcomeMessageOrForm() {
+        if (document.cookie  == "") showForm();
+
+        hideForm()
+
+        let logout = document.createElement("A");
+        logout.setAttribute('href', "#");
+        logout.setAttribute('onclick', "showForm()");
+        logout.innerHTML = "(logout)";
+        logout.style.weight = "normal";
+        logout.style.fontStyle = "italic";
+        logout.style.marginLeft = "10px";
+
+        let welcome = document.createElement("H1");
+        welcome.setAttribute('id', "welcome");
+        welcome.innerHTML = `Welcome ${getCookie("firstname")}`;
+        welcome.appendChild(logout);
+
+        document.body.appendChild(welcome);
+      }
+    </script>
+  </body>
+</html>
