@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Task 6</title>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <script type="application/javascript">
+      function createFamilyTree() {
+        let table = $("<table>");
+        let thead = $("<thead>");
+        let head = $("<tr>");
+        let tbody = $("<tbody>");
+
+        head.append($("<th>").text("Firstname"));
+        head.append($("<th>").text("Lastname"));
+        thead.append(head);
+
+        table.append(thead, tbody);
+        $("body").append(table);
+      }
+
+      function addNewMember(firstName, lastName, position) {
+        if (firstName == "" || lastName == "") return;
+
+        let nb = $("<tr>");
+        nb.append($("<td>").text(firstName));
+        nb.append($("<td>").text(lastName));
+
+        let remove = $("<td>").text("(x)");
+        remove.css("background-color", "orange");
+        remove.click(() => {
+          nb.remove();
+        });
+
+        nb.append(remove);
+        if (position == "before") {
+          $("tbody").prepend(nb);
+        } else {
+          $("tbody").append(nb);
+        }
+      }
+
+      function createForm() {
+        let form = $("<form>");
+        let i1 = $("<input>").attr({ type: "text" });
+        let i2 = $("<input>").attr({ type: "text" });
+        let sel = $("<select>");
+        sel.append($("<option>").attr("value", "before").text("Before"));
+        sel.append($("<option>").attr("value", "after").text("after"));
+
+        let is = $("<input>").attr({ type: "submit" });
+        is.click(() => {
+          addNewMember(i1.val(), i2.val(), sel.val());
+          return false;
+        });
+
+        form.append(i1, i2, sel, is);
+        $("body").prepend(form);
+      }
+
+      createForm();
+      createFamilyTree();
+    </script>
+  </body>
+</html>
